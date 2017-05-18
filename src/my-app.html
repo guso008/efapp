@@ -169,7 +169,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         }
 
         // Close a non-persistent drawer when the page & route are changed.
-        if (!this.$.drawer.persistent) {
+        if (this.page != 'login' && !this.$.drawer.persistent) {
           this.$.drawer.close();
         }
       }
