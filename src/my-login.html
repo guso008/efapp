@@ -1,0 +1,248 @@
+<!-- Load the Polymer.Element base class -->
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/paper-checkbox/paper-checkbox.html">
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
+
+
+<dom-module id="my-login">
+    <!-- Defines the element's style and local DOM -->
+    <template>
+        <style>
+            :host {
+                /*display: block;
+                padding: 16px;*/
+            }
+
+            body,
+            html {
+                margin: 0;
+                height: 100%;
+                font-family: "Open Sans";
+                font-size: 1em;
+                overflow: hidden;
+            }
+            h1 {
+                font-family: "Oswald";
+                font-weight: 400;
+                letter-spacing: 1px;
+                color: #DDDDDD;
+                margin-bottom: 55px;
+            }
+
+            paper-input {
+                max-width: 400px;
+                margin: auto;
+            }
+            iron-icon, div[suffix] {
+                color: hsl(0, 0%, 50%);
+            }
+
+            paper-button {
+                font-family: 'Roboto', 'Noto', sans-serif;
+                font-weight: normal;
+                font-size: 14px;
+                -webkit-font-smoothing: antialiased;
+            }
+            paper-button.pink {
+                color: var(--paper-pink-a200);
+                --paper-button-ink-color: var(--paper-pink-a200);
+            }
+            paper-button.pink:hover {
+                background-color: var(--paper-pink-100);
+            }
+            paper-button.indigo {
+                background-color: var(--paper-indigo-500);
+                color: white;
+            --paper-button-raised-keyboard-focus: {
+                 background-color: var(--paper-pink-a200) !important;
+                 color: white !important;
+             };
+            }
+            paper-button.indigo:hover {
+                background-color: var(--paper-indigo-400);
+            }
+            paper-button.green {
+                background-color: var(--paper-green-500);
+                color: white;
+            }
+            paper-button.green[active] {
+                background-color: var(--paper-red-500);
+            }
+            paper-button.disabled {
+                color: white;
+            }
+
+            .content-wrapper {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                box-shadow: 2px 2px 20px 0 rgba(0, 0, 0, 0.25);
+            }
+            .content-wrapper .background {
+                width: 40%;
+                height: 100%;
+                position: absolute;
+                background-size: cover;
+                background-position: center;
+                background-image: url("https://static.pexels.com/photos/225502/pexels-photo-225502.jpeg");
+            }
+            .content-wrapper .background.background-right {
+                background-image: url("https://static.pexels.com/photos/271560/pexels-photo-271560.jpeg");
+                right: 0;
+            }
+            .content-wrapper .sing-in-panel,
+            .content-wrapper .sing-up-panel {
+                position: absolute;
+                right: 0;
+                width: 60%;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                pointer-events: none;
+                opacity: 0;
+                visibility: hidden;
+                transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+                z-index: 10;
+            }
+            .content-wrapper .sing-in-panel form,
+            .content-wrapper .sing-up-panel form {
+                text-align: center;
+            }
+            .content-wrapper .sing-in-panel.active,
+            .content-wrapper .sing-up-panel.active {
+                pointer-events: auto;
+                opacity: 1;
+                visibility: visible;
+                transform: translateX(0px);
+            }
+            .content-wrapper .sing-in-panel .button-wrapper,
+            .content-wrapper .sing-up-panel .button-wrapper {
+                margin-top: 15px;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+            }
+            .content-wrapper .sing-in-panel {
+                right: 0;
+                transform: translateX(100px);
+            }
+            .content-wrapper .sing-up-panel {
+                left: 0;
+                transform: translateX(-100px);
+            }
+            .content-wrapper .floating-content {
+                position: absolute;
+                left: 0;
+                width: 60%;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.25);
+                transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+                background-color: #434C5F;
+            }
+            .content-wrapper .floating-content::before {
+                display: block;
+                content: "";
+                position: absolute;
+                z-index: 1;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                top: 0;
+                background: linear-gradient(to top, rgba(140, 189, 224, 0.15) 0%, #434C5F 100%);
+            }
+            .content-wrapper .floating-content.active {
+                margin-left: 40%;
+            }
+        </style>
+
+        <!--<h1>New view</h1>-->
+        <!--<paper-checkbox>Ready to deploy!</paper-checkbox>-->
+        <!--<paper-input label="Input label"></paper-input>-->
+        <div class="content-wrapper">
+            <div class="background background-left"></div>
+            <div class="background background-right"></div>
+            <div id="signUpPanel" class="sing-up-panel active">
+                <form>
+                    <h1>Sign Up FACELESS easy!</h1>
+                    <paper-input always-float-label label="Floating label"></paper-input>
+                    <paper-input label="username">
+                        <iron-icon icon="mail" slot="prefix"></iron-icon>
+                        <div slot="suffix">@email.com</div>
+                    </paper-input>
+
+                </form>
+                <div class="layout horizontal center" style="margin-top:5%;">
+                    <paper-button raised class="indigo" on-click="toggleSignIn">SIGN IN</paper-button>
+                    <paper-button toggles raised class="green">SIGN UP</paper-button>
+                </div>
+            </div>
+            <div id="signInPanel" class="sing-in-panel">
+                <form>
+                    <h1>Sign In to your EFACELESS</h1>
+                    <paper-input label="Password"></paper-input>
+                </form>
+                <div class="layout horizontal center" style="margin-top:5%;">
+                    <paper-button raised class="indigo">SIGN IN</paper-button>
+                    <paper-button toggles raised class="green" on-click="toggleSignUp">SIGN UP</paper-button>
+                </div>
+            </div>
+            <div id="floatingContent" class="floating-content"></div>
+        </div>
+    </template>
+    <script>
+        // Your new element extends the Polymer.Element base class
+        class MyLogin extends Polymer.Element {
+            static get is() { return 'my-login'; }
+
+            ready() {
+                super.ready();
+                // retrieve the nested template
+                let template = this.shadowRoot.querySelector('#signUpPanel');
+                alert("READY");
+            }
+            toggleSignIn(e) {
+                var floatingContent = this.shadowRoot.querySelector('#floatingContent');
+                floatingContent.className = "floating-content active";
+
+                var signUpPanel = this.shadowRoot.querySelector('#signUpPanel');
+                signUpPanel.className = "sing-up-panel";
+
+                var signInPanel = this.shadowRoot.querySelector('#signInPanel');
+                signInPanel.className = "sing-in-panel active";
+
+            }
+
+            toggleSignUp(e) {
+//                $(".floating-content").removeClass("active");
+//                $(".sing-in-panel").removeClass("active");
+//                $(".sing-up-panel").addClass("active");
+                var floatingContent = this.shadowRoot.querySelector('#floatingContent');
+                floatingContent.className = "floating-content";
+
+                var signUpPanel = this.shadowRoot.querySelector('#signUpPanel');
+                signUpPanel.className = "sing-up-panel active";
+
+                var signInPanel = this.shadowRoot.querySelector('#signInPanel');
+                signInPanel.className = "sing-in-panel";
+
+            }
+        }
+        //Now, register your new custom element so the browser can use it
+        customElements.define(MyLogin.is, MyLogin);
+
+        var button = document.querySelector('paper-button');
+
+    </script>
+</dom-module>
