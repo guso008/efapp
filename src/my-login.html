@@ -91,10 +91,12 @@
                 position: absolute;
                 background-size: cover;
                 background-position: center;
-                background-image: url("https://static.pexels.com/photos/225502/pexels-photo-225502.jpeg");
+                /*background-image: url("https://static.pexels.com/photos/225502/pexels-photo-225502.jpeg");*/
+                background-image: url("https://images.unsplash.com/photo-1491642273511-91b7769b169e?dpr=1&auto=format&fit=crop&w=1500&h=1500&q=80&cs=tinysrgb&crop=&bg=");
             }
             .content-wrapper .background.background-right {
-                background-image: url("https://static.pexels.com/photos/271560/pexels-photo-271560.jpeg");
+                /*background-image: url("https://static.pexels.com/photos/271560/pexels-photo-271560.jpeg");*/
+                background-image: url("http://static.picto.fr/wp-content/uploads/2014/04/Victor-Habchy.jpg");
                 right: 0;
             }
             .content-wrapper .sing-in-panel,
@@ -175,22 +177,17 @@
             <div id="signUpPanel" class="sing-up-panel active">
                 <form>
                     <h1>Sign Up FACELESS easy!</h1>
-                    <paper-input always-float-label label="Floating label"></paper-input>
-                    <paper-input label="username">
-                        <iron-icon icon="mail" slot="prefix"></iron-icon>
-                        <div slot="suffix">@email.com</div>
-                    </paper-input>
-
+                    <paper-input always-float-label label="Password" type="password"></paper-input>
                 </form>
                 <div class="layout horizontal center" style="margin-top:5%;">
                     <paper-button raised class="indigo" on-click="toggleSignIn">SIGN IN</paper-button>
-                    <paper-button toggles raised class="green">SIGN UP</paper-button>
+                    <paper-button toggles raised class="green" on-click="signIn">SIGN UP</paper-button>
                 </div>
             </div>
             <div id="signInPanel" class="sing-in-panel">
                 <form>
                     <h1>Sign In to your EFACELESS</h1>
-                    <paper-input label="Password"></paper-input>
+                    <paper-input label="Password" type="password"></paper-input>
                 </form>
                 <div class="layout horizontal center" style="margin-top:5%;">
                     <paper-button raised class="indigo" on-click="signIn">SIGN IN</paper-button>

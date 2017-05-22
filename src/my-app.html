@@ -109,7 +109,7 @@
                     <app-toolbar>
                         <paper-icon-button icon="my-icons:menu" drawer-toggle></paper-icon-button>
                         <div main-title>Efaceless</div>
-                        <paper-icon-button icon="search"></paper-icon-button>
+                        <paper-icon-button icon="search" on-click="searchHome"></paper-icon-button>
                         <iron-image class="avatar" sizing="contain" src="http://lorempixel.com/400/400"></iron-image>
                         <paper-icon-button icon="more-vert"></paper-icon-button>
                     </app-toolbar>
@@ -173,6 +173,8 @@
             this.page = page || 'login';
 
             if (this.page == 'login') {
+                var page = this.shadowRoot.querySelector('#page');
+                page.if = false;
                 var login = this.shadowRoot.querySelector('#login');
                 login.if = true;
             } else {
@@ -200,6 +202,11 @@
 
         _showPage404() {
             this.page = 'view404';
+        }
+
+        searchHome (){
+            window.history.pushState({}, null, '/home');
+            window.dispatchEvent(new CustomEvent('location-changed'));
         }
     }
 
