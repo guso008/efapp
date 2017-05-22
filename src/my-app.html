@@ -81,22 +81,16 @@
             box-sizing: border-box;
             background-color: #DDD;
         }
-
-
-
-
-
-
         </style>
 
 
         <app-location route="{{route}}"></app-location>
         <app-route route="{{route}}" pattern="[[rootPattern]]:page" data="{{routeData}}"
                    tail="{{subroute}}"></app-route>
-        <!--<template id="login" is="dom-if" if="{{conditionLogin}}">-->
-            <!--<my-login></my-login>-->
-        <!--</template>-->
-        <!--<template id="page" is="dom-if" if="{{conditionPage}}">-->
+        <template id="login" is="dom-if" if="{{conditionLogin}}">
+            <my-login></my-login>
+        </template>
+        <template id="page" is="dom-if" if="{{conditionPage}}">
             <app-drawer-layout id="drawerLayout" fullbleed force-narrow>
             <!-- Drawer content -->
             <app-drawer id="drawer" slot="drawer">
@@ -178,13 +172,13 @@
             // Default to 'view1' in that case.
             this.page = page || 'login';
 
-            /*if (this.page == 'login') {
+            if (this.page == 'login') {
                 var login = this.shadowRoot.querySelector('#login');
                 login.if = true;
             } else {
                 var page = this.shadowRoot.querySelector('#page');
                 page.if = true;
-            }*/
+            }
 
             // Close a non-persistent drawer when the page & route are changed.
             if (this.page != 'login' && !this.$.drawer.persistent) {

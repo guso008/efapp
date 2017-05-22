@@ -167,9 +167,6 @@
             }
         </style>
 
-        <!--<h1>New view</h1>-->
-        <!--<paper-checkbox>Ready to deploy!</paper-checkbox>-->
-        <!--<paper-input label="Input label"></paper-input>-->
         <div class="content-wrapper">
             <div class="background background-left"></div>
             <div class="background background-right"></div>
@@ -194,7 +191,7 @@
                     <paper-input label="Password"></paper-input>
                 </form>
                 <div class="layout horizontal center" style="margin-top:5%;">
-                    <paper-button raised class="indigo">SIGN IN</paper-button>
+                    <paper-button raised class="indigo" on-click="signIn">SIGN IN</paper-button>
                     <paper-button toggles raised class="green" on-click="toggleSignUp">SIGN UP</paper-button>
                 </div>
             </div>
@@ -210,8 +207,10 @@
                 super.ready();
                 // retrieve the nested template
                 let template = this.shadowRoot.querySelector('#signUpPanel');
+                let templateSig = this.shadowRoot.querySelector('#signInPanel');
             }
-            toggleSignIn(e) {
+
+            toggleSignIn() {
                 var floatingContent = this.shadowRoot.querySelector('#floatingContent');
                 floatingContent.className = "floating-content active";
 
@@ -223,10 +222,7 @@
 
             }
 
-            toggleSignUp(e) {
-//                $(".floating-content").removeClass("active");
-//                $(".sing-in-panel").removeClass("active");
-//                $(".sing-up-panel").addClass("active");
+            toggleSignUp() {
                 var floatingContent = this.shadowRoot.querySelector('#floatingContent');
                 floatingContent.className = "floating-content";
 
@@ -236,6 +232,10 @@
                 var signInPanel = this.shadowRoot.querySelector('#signInPanel');
                 signInPanel.className = "sing-in-panel";
 
+            }
+
+            signIn (){
+                window.location.assign((new URL(this.rootPath)).pathname + "home");
             }
         }
         //Now, register your new custom element so the browser can use it
