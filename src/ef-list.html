@@ -1,0 +1,160 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../bower_components/app-layout/app-toolbar/app-toolbar.html">
+<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../bower_components/paper-styles/color.html">
+<link rel="import" href="../bower_components/paper-styles/typography.html">
+<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../bower_components/iron-image/iron-image.html">
+<link rel="import" href="../bower_components/iron-list/iron-list.html">
+
+
+<dom-module id="ef-list">
+    <template>
+        <style>
+            :host {
+                display: block;
+                /*padding: 10px;*/
+            }
+
+            iron-list {
+                padding-top: 10px;
+                --iron-list-items-container: {
+                    max-width: 800px;
+                    margin: auto;
+                    margin-top: 10px;
+                    margin-bottom: 60px;
+                    border-bottom: 1px solid #ddd;
+                };
+            }
+
+            .item {
+                @apply --layout-horizontal;
+                padding: 20px;
+                background-color: white;
+                border: 1px solid #ddd;
+                cursor: pointer;
+                margin-bottom: 10px;
+            }
+
+            .avatar {
+                height: 40px;
+                width: 40px;
+                border-radius: 20px;
+                box-sizing: border-box;
+                background-color: #DDD;
+            }
+
+            .pad {
+                padding: 0 16px;
+                @apply --layout-flex;
+                @apply --layout-vertical);
+            }
+
+            .primary {
+                font-size: 16px;
+                font-weight: bold;
+            }
+
+            .shortText, .longText {
+                font-size: 14px;
+            }
+
+            .longText {
+                color: gray;
+                display: none;
+            }
+
+            .item:hover .shortText::after {
+                content: ' [+]';
+                color: gray;
+            }
+
+            .item.expanded:hover .shortText::after {
+                content: '';
+            }
+
+            .item.expanded .longText {
+                display: block;
+            }
+
+            .item.expanded:hover .longText::after {
+                content: ' [–]';
+            }
+
+            .spacer {
+                @apply --layout-flex;
+            }
+
+            @media (max-width: 460px) {
+                paper-toolbar .bottom.title {
+                    font-size: 14px;
+                }
+            }
+        </style>
+
+        <iron-ajax url="src/data/contacts.json" last-response="{{items}}" auto></iron-ajax>
+        <iron-list id="list" items="[[items]]" as="item" selection-enabled multi-selection>
+            <template>
+                <div>
+                    <div class$="[[getClassForItem(item, selected)]]" tabindex$="[[tabIndex]]">
+                        <!--<iron-image class="avatar" sizing="contain" src="[[item.image]]"></iron-image>-->
+                        <iron-image class="avatar" sizing="contain" src="http://lorempixel.com/400/400"></iron-image>
+                        <div class="pad">
+                            <div class="primary">[[item.name]]</div>
+                            <div class="shortText">[[item.shortText]]</div>
+                            <div class="longText">[[item.longText]]</div>
+                        </div>
+                        <iron-icon icon$="[[iconForItem(item)]]"></iron-icon>
+                    </div>
+                </div>
+            </template>
+        </iron-list>
+    </template>
+
+    <script>
+        class EfList extends Polymer.Element {
+            static get is() { return 'ef-list'; }
+
+            static get properties() {
+                return {
+                    items: {
+                        type: Array,
+                        value: function() {
+                            return [];
+                        }
+                    },
+                };
+            }
+
+            connectedCallback() {
+                super.connectedCallback();
+
+                // Use the document element
+                this.$.list.scrollTarget = this.ownerDocument.documentElement;
+            }
+
+            iconForItem(item) {
+                return item ? (item.integer < 50 ? 'favorite-border' : 'favorite') : '';
+            }
+
+            getClassForItem(item, selected) {
+                return selected ? 'item expanded' : 'item';
+            }
+        }
+
+        window.customElements.define(EfList.is, EfList);
+    </script>
+</dom-module>

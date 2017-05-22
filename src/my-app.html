@@ -1,13 +1,4 @@
-<!--
-@license
-Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
--->
-
+<!-- @license Copyright (c) 2016 The Polymer Project Authors. All rights reserved. This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt Code distributed by Google as part of the polymer project is also subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt -->
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../bower_components/app-layout/app-drawer/app-drawer.html">
 <link rel="import" href="../bower_components/app-layout/app-drawer-layout/app-drawer-layout.html">
@@ -20,175 +11,202 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="../bower_components/iron-selector/iron-selector.html">
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
-<link rel="import" href="my-icons.html">
+<link rel="import" href="../bower_components/iron-icons/iron-icons.html">
 
-<link rel="lazy-import" href="my-view1.html">
-<link rel="lazy-import" href="my-view2.html">
-<link rel="lazy-import" href="my-view3.html">
+<link rel="import" href="../bower_components/paper-dialog/paper-dialog.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/paper-dialog-scrollable/paper-dialog-scrollable.html">
+<link rel="import" href="../bower_components/neon-animation/web-animations.html">
+<link rel="import" href="../bower_components/neon-animation/neon-animations.html">
+<link rel="import" href="../bower_components/paper-dropdown-menu/paper-dropdown-menu-light.html">
+<link rel="import" href="../bower_components/paper-listbox/paper-listbox.html">
+<link rel="import" href="../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../bower_components/iron-demo-helpers/demo-snippet.html">
+<link rel="import" href="../bower_components/iron-demo-helpers/demo-pages-shared-styles.html">
+
+<link rel="import" href="my-icons.html">
+<link rel="lazy-import" href="my-emotion.html">
 <link rel="lazy-import" href="my-view404.html">
 
 <dom-module id="my-app">
-  <template>
-    <style>
-      :host {
-        --app-primary-color: #4285f4;
-        --app-secondary-color: black;
+    <template>
+        <style> :host {
+            --app-primary-color: #4285f4;
+            --app-secondary-color: black;
+            display: block;
+        }
 
-        display: block;
-      }
+        app-drawer-layout:not([narrow]) [drawer-toggle] {
+            display: none;
+        }
 
-      app-drawer-layout:not([narrow]) [drawer-toggle] {
-        display: none;
-      }
+        app-header {
+            color: #fff;
+            background-color: var(--app-primary-color);
+        }
 
-      app-header {
-        color: #fff;
-        background-color: var(--app-primary-color);
-      }
+        app-header paper-icon-button {
+            --paper-icon-button-ink-color: white;
+        }
 
-      app-header paper-icon-button {
-        --paper-icon-button-ink-color: white;
-      }
+        paper-icon-button {
+            --paper-icon-button-ink-color: black;
+        }
 
-      .drawer-list {
-        margin: 0 20px;
-      }
+        paper-icon-button + [main-title] {
+            margin-left: 24px;
+        }
 
-      .drawer-list a {
-        display: block;
-        padding: 0 16px;
-        text-decoration: none;
-        color: var(--app-secondary-color);
-        line-height: 40px;
-      }
+        .drawer-list {
+            margin: 0 20px;
+        }
 
-      .drawer-list a.iron-selected {
-        color: black;
-        font-weight: bold;
-      }
-    </style>
+        .drawer-list a {
+            display: block;
+            padding: 0 16px;
+            text-decoration: none;
+            color: var(--app-secondary-color);
+            line-height: 40px;
+        }
 
-    <app-location route="{{route}}"></app-location>
-    <app-route
-        route="{{route}}"
-        pattern="[[rootPattern]]:page"
-        data="{{routeData}}"
-        tail="{{subroute}}"></app-route>
+        .drawer-list a.iron-selected {
+            color: black;
+            font-weight: bold;
+        }
 
-    <template id="login" is="dom-if" if="{{conditionLogin}}">
-      <my-login></my-login>
+        .avatar {
+            height: 40px;
+            width: 40px;
+            border-radius: 20px;
+            box-sizing: border-box;
+            background-color: #DDD;
+        }
+
+
+
+
+
+
+        </style>
+
+
+        <app-location route="{{route}}"></app-location>
+        <app-route route="{{route}}" pattern="[[rootPattern]]:page" data="{{routeData}}"
+                   tail="{{subroute}}"></app-route>
+        <!--<template id="login" is="dom-if" if="{{conditionLogin}}">-->
+            <!--<my-login></my-login>-->
+        <!--</template>-->
+        <!--<template id="page" is="dom-if" if="{{conditionPage}}">-->
+            <app-drawer-layout id="drawerLayout" fullbleed force-narrow>
+            <!-- Drawer content -->
+            <app-drawer id="drawer" slot="drawer">
+                <app-toolbar>
+                    <div main-title>App name</div>
+                </app-toolbar>
+                <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
+                    <a name="emotion" href="emotion">Mis Emociones</a>
+                </iron-selector>
+            </app-drawer>
+
+            <!-- Main content -->
+            <app-header-layout has-scrolling-region>
+
+                <app-header slot="header" condenses reveals effects="waterfall">
+                    <app-toolbar>
+                        <paper-icon-button icon="my-icons:menu" drawer-toggle></paper-icon-button>
+                        <div main-title>Efaceless</div>
+                        <paper-icon-button icon="search"></paper-icon-button>
+                        <iron-image class="avatar" sizing="contain" src="http://lorempixel.com/400/400"></iron-image>
+                        <paper-icon-button icon="more-vert"></paper-icon-button>
+                    </app-toolbar>
+                </app-header>
+
+                <iron-pages
+                        selected="[[page]]"
+                        attr-for-selected="name"
+                        fallback-selection="view404"
+                        role="main">
+                    <my-home name="home"></my-home>
+                    <my-homefrag name="homefrag"></my-homefrag>
+                    <my-emotion name="emotion"></my-emotion>
+                    <my-view404 name="view404"></my-view404>
+                </iron-pages>
+            </app-header-layout>
+        </app-drawer-layout>
+        </template>
     </template>
-    <template id="page" is="dom-if" if="{{conditionPage}}">
-      <app-drawer-layout fullbleed>
-      <!-- Drawer content -->
-      <app-drawer id="drawer" slot="drawer">
-        <app-toolbar>Menu</app-toolbar>
-        <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
-          <a name="home" href="home">Home</a>
-          <a name="view1" href="view1">View One</a>
-          <a name="view2" href="view2">View Two</a>
-          <a name="view3" href="view3">View Three</a>
-        </iron-selector>
-      </app-drawer>
-
-      <!-- Main content -->
-      <app-header-layout has-scrolling-region>
-
-        <app-header slot="header" condenses reveals effects="waterfall">
-          <app-toolbar>
-            <paper-icon-button icon="my-icons:menu" drawer-toggle></paper-icon-button>
-            <div main-title>Efaceless</div>
-          </app-toolbar>
-        </app-header>
-
-        <iron-pages
-            selected="[[page]]"
-            attr-for-selected="name"
-            fallback-selection="view404"
-            role="main">
-          <my-home name="home"></my-home>
-          <my-view1 name="view1"></my-view1>
-          <my-view2 name="view2"></my-view2>
-          <my-view3 name="view3"></my-view3>
-          <my-view404 name="view404"></my-view404>
-        </iron-pages>
-      </app-header-layout>
-    </app-drawer-layout>
-    </template>
-  </template>
-
-  <script>
-    class MyApp extends Polymer.Element {
-
-      static get is() { return 'my-app'; }
-
-      static get properties() {
-        return {
-          page: {
-            type: String,
-            reflectToAttribute: true,
-            observer: '_pageChanged',
-          },
-          rootPattern: String,
-          routeData: Object,
-          subroute: String,
-        };
-      }
-
-      static get observers() {
-        return [
-          '_routePageChanged(routeData.page)',
-        ];
-      }
-
-      constructor() {
-        super();
-
-        // Get root pattern for app-route, for more info about `rootPath` see:
-        // https://www.polymer-project.org/2.0/docs/upgrade#urls-in-templates
-        this.rootPattern = (new URL(this.rootPath)).pathname;
-      }
-
-      _routePageChanged(page) {
-        // Polymer 2.0 will call with `undefined` on initialization.
-        // Ignore until we are properly called with a string.
-        if (page === undefined) {
-          return;
+    <script> class MyApp extends Polymer.Element {
+        static get is() {
+            return 'my-app';
         }
 
-        // If no page was found in the route data, page will be an empty string.
-        // Deault to 'view1' in that case.
-        this.page = page || 'login';
-
-        if (this.page == 'login'){
-          var login = this.shadowRoot.querySelector('#login');
-          login.if = true;
-        } else{
-          var page = this.shadowRoot.querySelector('#page');
-          page.if = true;
+        static get properties() {
+            return {
+                page: {
+                    type: String,
+                    reflectToAttribute: true,
+                    observer: '_pageChanged',
+                },
+                rootPattern: String,
+                routeData: Object,
+                subroute: String,
+            };
         }
 
-        // Close a non-persistent drawer when the page & route are changed.
-        if (this.page != 'login' && !this.$.drawer.persistent) {
-          this.$.drawer.close();
+        static get observers() {
+            return [
+                '_routePageChanged(routeData.page)',
+            ];
         }
-      }
 
-      _pageChanged(page) {
-        // Load page import on demand. Show 404 page if fails
-        var resolvedPageUrl = this.resolveUrl('my-' + page + '.html');
-        Polymer.importHref(
-            resolvedPageUrl,
-            null,
-            this._showPage404.bind(this),
-            true);
-      }
+        constructor() {
+            super();
 
-      _showPage404() {
-        this.page = 'view404';
-      }
+            // Get root pattern for app-route, for more info about `rootPath` see:
+            // https://www.polymer-project.org/2.0/docs/upgrade#urls-in-templates
+            this.rootPattern = (new URL(this.rootPath)).pathname;
+        }
+
+        _routePageChanged(page) {
+            // Polymer 2.0 will call with `undefined` on initialization.
+            // Ignore until we are properly called with a string.
+            if (page === undefined) {
+                return;
+            }
+
+            // If no page was found in the route data, page will be an empty string.
+            // Default to 'view1' in that case.
+            this.page = page || 'login';
+
+            /*if (this.page == 'login') {
+                var login = this.shadowRoot.querySelector('#login');
+                login.if = true;
+            } else {
+                var page = this.shadowRoot.querySelector('#page');
+                page.if = true;
+            }*/
+
+            // Close a non-persistent drawer when the page & route are changed.
+            if (this.page != 'login' && !this.$.drawer.persistent) {
+              this.$.drawer.close();
+            }
+        }
+
+        _pageChanged(page) {
+            // Load page import on demand. Show 404 page if fails
+            var resolvedPageUrl = this.resolveUrl('my-' + page + '.html');
+            Polymer.importHref(
+                resolvedPageUrl,
+                null,
+                this._showPage404.bind(this),
+                true);
+        }
+
+        _showPage404() {
+            this.page = 'view404';
+        }
     }
 
     window.customElements.define(MyApp.is, MyApp);
-  </script>
+    </script>
 </dom-module>

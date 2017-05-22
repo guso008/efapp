@@ -1,0 +1,50 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+
+<link rel="import" href="../bower_components/iron-demo-helpers/demo-pages-shared-styles.html">
+<link rel="import" href="../bower_components/iron-demo-helpers/demo-snippet.html">
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="../bower_components/paper-styles/typography.html">
+<link rel="import" href="../bower_components/paper-tabs/paper-tab.html">
+<link rel="import" href="../bower_components/paper-tabs/paper-tabs.html">
+
+<dom-module id="ef-tabs">
+    <template>
+        <style>
+            :host {
+                display: block;
+                /*padding: 10px;*/
+            }
+
+            paper-tabs {
+                background-color: var(--paper-blue-900);
+                color: #fff;
+                margin-bottom: 1px;
+            }
+        </style>
+
+        <paper-tabs selected="0">
+            <paper-tab>Events</paper-tab>
+            <paper-tab>Collective</paper-tab>
+            <paper-tab>Empathy</paper-tab>
+        </paper-tabs>
+    </template>
+
+    <script>
+        class EfTabs extends Polymer.Element {
+            static get is() { return 'ef-tabs'; }
+        }
+
+        window.customElements.define(EfTabs.is, EfTabs);
+    </script>
+</dom-module>
