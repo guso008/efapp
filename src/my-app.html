@@ -176,13 +176,15 @@
                 var login = this.shadowRoot.querySelector('#login');
                 login.if = true;
             } else {
+                var login = this.shadowRoot.querySelector('#login');
+                login.if = false;
                 var page = this.shadowRoot.querySelector('#page');
                 page.if = true;
             }
 
             // Close a non-persistent drawer when the page & route are changed.
             if (this.page != 'login' && !this.$.drawer.persistent) {
-              this.$.drawer.close();
+              //this.$.drawer.close();
             }
         }
 

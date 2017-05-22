@@ -8,6 +8,8 @@
 <link rel="import" href="../bower_components/paper-checkbox/paper-checkbox.html">
 <link rel="import" href="../bower_components/paper-input/paper-input.html">
 
+<link rel="import" href="../bower_components/app-route/app-location.html">
+<link rel="import" href="../bower_components/app-route/app-route.html">
 
 <dom-module id="my-login">
     <!-- Defines the element's style and local DOM -->
@@ -235,13 +237,11 @@
             }
 
             signIn (){
-                window.location.assign((new URL(this.rootPath)).pathname + "home");
+                window.history.pushState({}, null, '/home');
+                window.dispatchEvent(new CustomEvent('location-changed'));
             }
         }
         //Now, register your new custom element so the browser can use it
         customElements.define(MyLogin.is, MyLogin);
-
-        var button = document.querySelector('paper-button');
-
     </script>
 </dom-module>
