@@ -114,8 +114,26 @@
                         <paper-icon-button icon="my-icons:menu" drawer-toggle></paper-icon-button>
                         <div main-title>Efaceless</div>
                         <paper-icon-button icon="search" on-click="searchHome"></paper-icon-button>
-                        <iron-image class="avatar" sizing="contain" src="http://lorempixel.com/400/400"></iron-image>
-                        <paper-icon-button icon="more-vert"></paper-icon-button>
+                        <paper-menu-button  vertical-offset="52" vertical-align="top" horizontal-offset="10" horizontal-align="right">
+                            <paper-icon-button slot="dropdown-trigger" alt="menu" src="http://lorempixel.com/400/400" class="avatar" alt="octocat" title="octocat"></paper-icon-button>
+                            <paper-listbox slot="dropdown-content">
+                                <paper-item>Alive</paper-item>
+                                <paper-item>History</paper-item>
+                                <paper-item>Empathy</paper-item>
+                                <paper-item>Notifications</paper-item>
+                            </paper-listbox>
+                        </paper-menu-button>
+                        <paper-menu-button  vertical-offset="52" vertical-align="top" horizontal-offset="10" horizontal-align="right">
+                            <paper-icon-button icon="more-vert" slot="dropdown-trigger" alt="menu"></paper-icon-button>
+                            <paper-listbox slot="dropdown-content">
+                                <paper-item>Help</paper-item>
+                                <paper-item>Term</paper-item>
+                                <paper-item>About us</paper-item>
+                                <paper-item>Config</paper-item>
+                                <paper-item>Logout</paper-item>
+                            </paper-listbox>
+                        </paper-menu-button>
+                        <!--<paper-icon-button icon="more-vert"></paper-icon-button>-->
                     </app-toolbar>
                 </app-header>
 
