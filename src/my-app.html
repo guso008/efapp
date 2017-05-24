@@ -90,10 +90,10 @@
                    data="{{routeData}}"
                    tail="{{subroute}}">
         </app-route>
-        <!--<template id="login" is="dom-if" if="{{conditionLogin}}">-->
-            <!--<my-login></my-login>-->
-        <!--</template>-->
-        <!--<template id="page" is="dom-if" if="{{conditionPage}}">-->
+        <template id="login" is="dom-if" if="{{conditionLogin}}">
+            <my-login></my-login>
+        </template>
+        <template id="page" is="dom-if" if="{{conditionPage}}">
             <app-drawer-layout id="drawerLayout" fullbleed force-narrow>
             <!-- Drawer content -->
             <app-drawer id="drawer" slot="drawer">
@@ -147,7 +147,7 @@
                 </iron-pages>
             </app-header-layout>
         </app-drawer-layout>
-        <!--</template>-->
+        </template>
     </template>
     <script> class MyApp extends Polymer.Element {
         static get is() {
@@ -192,22 +192,22 @@
             // Default to 'view1' in that case.
             this.page = page || 'login';
 
-//            if (this.page == 'login') {
-//                var page = this.shadowRoot.querySelector('#page');
-//                page.if = false;
-//                var login = this.shadowRoot.querySelector('#login');
-//                login.if = true;
-//            } else {
-//                var login = this.shadowRoot.querySelector('#login');
-//                login.if = false;
-//                var page = this.shadowRoot.querySelector('#page');
-//                page.if = true;
-//            }
+            if (this.page == 'login') {
+                var page = this.shadowRoot.querySelector('#page');
+                page.if = false;
+                var login = this.shadowRoot.querySelector('#login');
+                login.if = true;
+            } else {
+                var login = this.shadowRoot.querySelector('#login');
+                login.if = false;
+                var page = this.shadowRoot.querySelector('#page');
+                page.if = true;
+            }
 
             // Close a non-persistent drawer when the page & route are changed.
-            if (this.page != 'login' && !this.$.drawer.persistent) {
-              this.$.drawer.close();
-            }
+//            if (this.page != 'login' && !this.$.drawer.persistent) {
+//              this.$.drawer.close();
+//            }
         }
 
         _pageChanged(page) {
