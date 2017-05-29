@@ -1,0 +1,240 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+
+<link rel="import" href="../bower_components/iron-collapse/iron-collapse.html">
+<link rel="import" href="../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../bower_components/iron-icons/communication-icons.html">
+<link rel="import" href="../bower_components/iron-icons/hardware-icons.html">
+<link rel="import" href="../bower_components/iron-icons/social-icons.html">
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/paper-checkbox/paper-checkbox.html">
+<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../bower_components/paper-styles/color.html">
+<link rel="import" href="../bower_components/paper-styles/typography.html">
+<link rel="import" href="../bower_components/paper-card/paper-card.html">
+
+<dom-module id="ef-collective">
+<template>
+    <custom-style>
+        <style is="custom-style">
+            .vertical-section-container {
+                max-width: 400px;
+            }
+
+            paper-card {
+                width: 100%;
+            }
+
+            .horizontal {
+                @apply --layout-horizontal;
+            }
+
+            .flex {
+                @apply --layout-flex;
+            }
+
+            .justified {
+                @apply --layout-justified;
+            }
+
+            .joy-yellow{
+                background: var(--paper-yellow-500);
+            }
+
+            .anger-red{
+                background: var(--paper-red-500);
+            }
+
+            .sadness-blue{
+                background: var(--paper-blue-500);
+            }
+
+            .disgust-green{
+                background: var(--paper-green-500);
+            }
+
+            .fear-purple{
+                background: var(--paper-purple-500);
+            }
+
+            .amber {
+                background: var(--paper-amber-900);
+            }
+
+            .lime {
+                background: var(--paper-lime-500);
+            }
+
+            .cyan {
+                background: var(--paper-cyan-500);
+            }
+
+            .dark {
+                background: var(--paper-blue-grey-500);
+            }
+            paper-c{
+                background: var(--paper-blue-grey-500);
+            }ard.dark, paper-card.amber, paper-card.lime, paper-card.cyan {
+                color: white;
+                --paper-card-header-color: white;
+            }
+
+            paper-checkbox {
+                display: block;
+                margin-bottom: 4px;
+                --paper-checkbox-label-color: white;
+                --paper-checkbox-unchecked-color: white;
+            }
+
+            paper-icon-button {
+                color: var(--paper-grey-600);
+            }
+
+            paper-icon-button.white {
+                color: white !important;
+            }
+
+            #notes {
+                @apply --layout-horizontal;
+                @apply --layout-wrap;
+                max-width: 1000px;
+                margin: auto;
+                margin-top: 10px;
+                margin-bottom: 60px;
+            }
+
+            #notes > paper-card {
+                box-sizing: border-box;
+                max-width: 184px;
+                margin: 3px;
+                flex: 0 0 auto;
+            }
+        </style>
+    </custom-style>
+    <div id="notes">
+        <paper-card heading="Boca empata!" class="anger-red">
+            <div class="card-content">
+                <p>Cede el torneo?</p>
+            </div>
+            <div class="card-actions" align="right">
+                <paper-icon-button icon="favorite" style="color:white;"></paper-icon-button>
+                <paper-icon-button icon="zoom-in" style="color:white;"></paper-icon-button>
+            </div>
+        </paper-card>
+        <paper-card heading="Frio invierno" class="sadness-blue">
+            <div class="card-content">
+                <p>Frio de madre</p>
+                <p>Campera a full</p>
+            </div>
+            <div class="card-actions" align="right">
+                <paper-icon-button icon="favorite" style="color:white;"></paper-icon-button>
+                <paper-icon-button icon="zoom-in" style="color:white;"></paper-icon-button>
+            </div>
+        </paper-card>
+        <paper-card heading="Motivacion a full" class="joy-yellow">
+            <p>Lo que no suma resta</p>
+            <p>Me siento motivado</p>
+            <p>El sol motiva</p>
+            <p>...</p>
+            <div class="card-actions" align="right">
+                <paper-icon-button icon="favorite" style="color:white;"></paper-icon-button>
+                <paper-icon-button icon="zoom-in" style="color:white;"></paper-icon-button>
+            </div>
+        </paper-card>
+        <paper-card heading="Me hastía DESPACITO" class="disgust-green">
+            <p>Basta Despacito en la sopa</p>
+            <p>No Justin</p>
+            <p>Me quema el cerebro</p>
+            <p>...</p>
+            <div class="card-actions" align="right">
+                <paper-icon-button icon="favorite" style="color:white;"></paper-icon-button>
+                <paper-icon-button icon="zoom-in" style="color:white;"></paper-icon-button>
+            </div>
+        </paper-card>
+        <paper-card heading="River pecho frío" class="fear-purple">
+            <div class="card-content">
+                Se le enfría el pecho a riber.
+            </div>
+            <div class="card-actions" align="right">
+                <paper-icon-button icon="favorite" style="color:white;"></paper-icon-button>
+                <paper-icon-button icon="zoom-in" style="color:white;"></paper-icon-button>
+            </div>
+        </paper-card>
+        <paper-card heading="Me hastía DESPACITO" class="disgust-green">
+            <p>Basta Despacito en la sopa</p>
+            <p>No Justin</p>
+            <p>Me quema el cerebro</p>
+            <p>...</p>
+            <div class="card-actions" align="right">
+                <paper-icon-button icon="favorite" style="color:white;"></paper-icon-button>
+                <paper-icon-button icon="zoom-in" style="color:white;"></paper-icon-button>
+            </div>
+        </paper-card>
+        <paper-card heading="River pecho frío" class="fear-purple">
+            <div class="card-content">
+                Se le enfría el pecho a riber.
+            </div>
+            <div class="card-actions" align="right">
+                <paper-icon-button icon="favorite" style="color:white;"></paper-icon-button>
+                <paper-icon-button icon="zoom-in" style="color:white;"></paper-icon-button>
+            </div>
+        </paper-card>
+        <paper-card heading="Boca empata!" class="anger-red">
+            <div class="card-content">
+                <p>Cede el torneo?</p>
+            </div>
+            <div class="card-actions" align="right">
+                <paper-icon-button icon="favorite" style="color:white;"></paper-icon-button>
+                <paper-icon-button icon="zoom-in" style="color:white;"></paper-icon-button>
+            </div>
+        </paper-card>
+        <paper-card heading="Motivacion a full" class="joy-yellow">
+            <p>Lo que no suma resta</p>
+            <p>Me siento motivado</p>
+            <p>El sol motiva</p>
+            <p>...</p>
+            <div class="card-actions" align="right">
+                <paper-icon-button icon="favorite" style="color:white;"></paper-icon-button>
+                <paper-icon-button icon="zoom-in" style="color:white;"></paper-icon-button>
+            </div>
+        </paper-card>
+        <paper-card heading="Frio invierno" class="sadness-blue">
+            <div class="card-content">
+                <p>Frio de madre</p>
+                <p>Campera a full</p>
+            </div>
+            <div class="card-actions" align="right">
+                <paper-icon-button icon="favorite" style="color:white;"></paper-icon-button>
+                <paper-icon-button icon="zoom-in" style="color:white;"></paper-icon-button>
+            </div>
+        </paper-card>
+        <paper-card heading="Motivacion a full" class="joy-yellow">
+            <p>Lo que no suma resta</p>
+            <p>Me siento motivado</p>
+            <p>El sol motiva</p>
+            <p>...</p>
+            <div class="card-actions" align="right">
+                <paper-icon-button icon="favorite" style="color:white;"></paper-icon-button>
+                <paper-icon-button icon="zoom-in" style="color:white;"></paper-icon-button>
+            </div>
+        </paper-card>
+        <paper-card heading="Me hastía DESPACITO" class="disgust-green">
+            <p>Basta Despacito en la sopa</p>
+            <p>No Justin</p>
+            <p>Me quema el cerebro</p>
+            <p>...</p>
+            <div class="card-actions" align="right">
+                <paper-icon-button icon="favorite" style="color:white;"></paper-icon-button>
+                <paper-icon-button icon="zoom-in" style="color:white;"></paper-icon-button>
+            </div>
+        </paper-card>
+    </div>
+</template>
+    <script>
+        class EfCollective extends Polymer.Element {
+            static get is() { return 'ef-collective'; }
+        }
+
+        window.customElements.define(EfCollective.is, EfCollective);
+    </script>
+</dom-module>
