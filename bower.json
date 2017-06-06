@@ -33,7 +33,9 @@
     "neon-animation": "PolymerElements/neon-animation#2.0-preview",
     "iron-demo-helpers": "PolymerElements/iron-demo-helpers#2.0-preview",
     "paper-tabs": "PolymerElements/paper-tabs#2.0-preview",
-    "paper-material": "PolymerElements/paper-material#^2.0.0"
+    "paper-material": "PolymerElements/paper-material#^2.0.0",
+    "iron-form": "PolymerElements/iron-form#2.0-preview",
+    "paper-spinner": "PolymerElements/paper-spinner#2.0-preview"
   },
   "resolutions": {
     "polymer": "^2.0.0-rc.3"

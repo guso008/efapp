@@ -1,0 +1,138 @@
+<!-- Load the Polymer.Element base class -->
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+
+<link rel="import" href="../bower_components/app-layout/app-box/app-box.html">
+<link rel="import" href="../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../bower_components/iron-icons/av-icons.html">
+<link rel="import" href="../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../bower_components/paper-fab/paper-fab.html">
+<link rel="import" href="../bower_components/app-layout/app-scroll-effects/app-scroll-effects.html">
+
+<link rel="import" href="../bower_components/app-layout/app-header/app-header.html">
+<link rel="import" href="../bower_components/app-layout/app-toolbar/app-toolbar.html">
+<link rel="import" href="../bower_components/app-layout/app-header-layout/app-header-layout.html">
+
+<link rel="import" href="ef-loginmodal.html">
+
+<dom-module id="my-fullpage">
+    <!-- Defines the element's style and local DOM -->
+    <template>
+        <style>
+            app-box {
+                position: fixed;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                --app-box-background-front-layer: {
+                    background-image: url("../images/efaceless.png");
+                    background-repeat: no-repeat;
+                    background-size: 100%;
+                    padding-bottom: 1000px;
+                };
+            }
+
+            app-header {
+                color: #546E7A;
+                --app-header-background-rear-layer: {
+                    background-color: #ef6c00;
+                };
+            }
+
+            #signin-nav-elements>.button-link {
+                height: 100%;
+                padding: 16px 12px;
+                border-bottom: 2px solid transparent;
+            }
+
+            #signin-nav-elements>.button-link:hover {
+                border-bottom: 2px solid #CFD8DC;
+            }
+
+            .anchor-like {
+                font-family: 'Roboto', sans-serif;
+                font-size: 14px;
+                font-weight: 500;
+                text-transform: uppercase;
+                line-height: 1;
+                letter-spacing: 0.01em;
+                white-space: nowrap;
+                cursor: pointer;
+            }
+
+            .centered {
+                min-width: 500px;
+            }
+
+            /* mobile layout */
+            @media (max-width: 600px) {
+
+                .content {
+                    margin: 254px 0 0 0;
+                    box-shadow: none;
+                }
+
+                paper-fab {
+                    top: 290px;
+                    right: 16px;
+                }
+
+            }
+        </style>
+
+        <app-box
+                effects="parallax-background"
+                effects-config='{"parallax-background": {"scalar": -0.5}}'></app-box>
+
+        <app-header-layout>
+
+            <app-header slot="header" reveals>
+                <app-toolbar>
+                    <div main-title></div>
+                    <span id="signin-nav-elements" layout="" horizontal="" center="">
+                        <span class="anchor-like button-link" role="button" tabindex="0" data-track-link="nav-signin" layout="" center="" on-click="openLogin">Sign in</span>
+                    </span>
+                </app-toolbar>
+            </app-header>
+
+        </app-header-layout>
+
+        <paper-dialog id="animated" entry-animation="scale-up-animation" exit-animation="fade-out-animation" with-backdrop class="centered">
+            <h2>Sigin - Register</h2>
+            <ef-loginmodal></ef-loginmodal>
+        </paper-dialog>
+    </template>
+    <script>
+        // Your new element extends the Polymer.Element base class
+        class MyFullpage extends Polymer.Element {
+            static get is() { return 'my-fullpage'; }
+
+            ready() {
+                super.ready();
+
+                var appHeader = this.shadowRoot.querySelector('app-header');
+                var appBox = this.shadowRoot.querySelector('app-box');
+                var fadeBackgroundEffect = appHeader.createEffect('fade-background');
+
+                window.addEventListener('scroll', function() {
+                    var progress = appBox.getScrollState().progress;
+                    var isCondensed = progress > 0.25;
+
+                    fadeBackgroundEffect.run(isCondensed ? 1 : 0);
+                    appHeader.shadow = isCondensed;
+                });
+            }
+
+            openLogin(){
+                var body = document.querySelector('body');
+                Polymer.dom(body).appendChild(this.$.animated);
+                this.$.animated.open();
+            }
+        }
+
+        //Now, register your new custom element so the browser can use it
+        customElements.define(MyFullpage.is, MyFullpage);
+    </script>
+</dom-module>

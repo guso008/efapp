@@ -1,0 +1,133 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/paper-input/paper-textarea.html">
+
+<link rel="import" href="../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../bower_components/iron-icons/communication-icons.html">
+<link rel="import" href="../bower_components/iron-demo-helpers/demo-snippet.html">
+<link rel="import" href="../bower_components/iron-demo-helpers/demo-pages-shared-styles.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../bower_components/paper-item/paper-icon-item.html">
+<link rel="import" href="../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../bower_components/paper-item/paper-item-body.html">
+<link rel="import" href="../bower_components/paper-styles/color.html">
+
+
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/paper-checkbox/paper-checkbox.html">
+<link rel="import" href="../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+<link rel="import" href="../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../bower_components/paper-listbox/paper-listbox.html">
+<link rel="import" href="../bower_components/paper-spinner/paper-spinner.html">
+<link rel="import" href="../bower_components/paper-styles/shadow.html">
+<link rel="import" href="../bower_components/iron-form/iron-form.html">
+
+
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+
+<dom-module id="ef-loginmodal">
+    <template>
+        <style>
+            :host {
+                display: block;
+                padding: 40px;
+            }
+
+            input, paper-input, paper-checkbox {
+                margin-bottom: 8px;
+            }
+
+            iron-form {
+                @apply --shadow-elevation-2dp;
+                padding: 20px;
+                min-width: 500px;
+            }
+
+            paper-button {
+                display: inline-block;
+                width: 45%;
+                text-align: center;
+            }
+            paper-button:not([disabled]) {
+                background: #03a9f4;
+                color: white;
+            }
+            paper-spinner {
+                width: 14px;
+                height: 14px;
+                margin-right: 20px;
+            }
+            .output {
+                margin-top: 20px;
+                word-wrap: break-word;
+                font-family: monospace;
+            }
+
+        </style>
+
+        <iron-form id="form4">
+            <form action="/home" method="get">
+                <paper-input name="password" label="Password" type="password" required auto-validate></paper-input>
+                <paper-checkbox name="read" required>You must check this box</paper-checkbox><br>
+
+                <paper-button raised on-click="delayedSubmit" disabled id="form4Submit">
+                    <paper-spinner id="spinner" hidden></paper-spinner>Submit</paper-button>
+                <paper-button raised on-click="form4.reset()">Reset</paper-button>
+            </form>
+            <div class="output"></div>
+        </iron-form>
+    </template>
+
+    <script>
+        class EfLoginmodal extends Polymer.Element {
+            static get is() { return 'ef-loginmodal'; }
+
+            ready() {
+                super.ready();
+
+                var form4 = this.shadowRoot.querySelector('#form4');
+                var spinner = this.shadowRoot.querySelector('#spinner');
+
+                form4.addEventListener('iron-form-submit', function(event) {
+//                    this.querySelector('.output').innerHTML = JSON.stringify(event.detail);
+                    spinner.active = false;
+                    spinner.hidden = true;
+                    form4Submit.disabled = false;
+                });
+                var form4Submit = this.shadowRoot.querySelector('#form4Submit');
+                form4.addEventListener('change', function(event) {
+                    // Validate the entire form to see if we should enable the `Submit` button.
+                    form4Submit.disabled = !form4.validate();
+                });
+            }
+
+            delayedSubmit() {
+                var spinner = this.shadowRoot.querySelector('#spinner');
+                spinner.active = true;
+                spinner.hidden = false;
+                var form4Submit = this.shadowRoot.querySelector('#form4Submit');
+                form4Submit.disabled = true;
+
+                var form4 = this.shadowRoot.querySelector('#form4');
+                // Simulate a slow server response.
+                setTimeout(function() {
+                    form4.submit()
+
+                    var animated = document.querySelector('#animated');
+                    animated.close();
+
+                    window.history.pushState({}, null, '/home');
+                    window.dispatchEvent(new CustomEvent('location-changed'));
+                }, 1000);
+
+
+            }
+        }
+
+        window.customElements.define(EfLoginmodal.is, EfLoginmodal);
+    </script>
+</dom-module>
