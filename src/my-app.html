@@ -93,6 +93,9 @@
         <template id="login" is="dom-if" if="{{conditionLogin}}">
             <my-fullpage></my-fullpage>
         </template>
+        <template id="register" is="dom-if" if="{{conditionLogin}}">
+            <my-register></my-register>
+        </template>
         <template id="page" is="dom-if" if="{{conditionPage}}">
             <app-drawer-layout id="drawerLayout" fullbleed force-narrow>
             <!-- Drawer content -->
@@ -199,9 +202,16 @@
                 page.if = false;
                 var login = this.shadowRoot.querySelector('#login');
                 login.if = true;
+            } else if (this.page == 'register') {
+                var page = this.shadowRoot.querySelector('#page');
+                page.if = false;
+                var login = this.shadowRoot.querySelector('#register');
+                login.if = true;
             } else {
                 var login = this.shadowRoot.querySelector('#login');
                 login.if = false;
+                var register = this.shadowRoot.querySelector('#register');
+                register.if = false;
                 var page = this.shadowRoot.querySelector('#page');
                 page.if = true;
             }

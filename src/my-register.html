@@ -1,0 +1,215 @@
+<!-- Load the Polymer.Element base class -->
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+
+<link rel="import" href="../bower_components/app-layout/app-box/app-box.html">
+<link rel="import" href="../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../bower_components/iron-icons/av-icons.html">
+<link rel="import" href="../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../bower_components/paper-fab/paper-fab.html">
+<link rel="import" href="../bower_components/app-layout/app-scroll-effects/app-scroll-effects.html">
+<link rel="import" href="../bower_components/app-layout/app-box/app-box.html">
+<link rel="import" href="../bower_components/app-layout/app-header/app-header.html">
+<link rel="import" href="../bower_components/app-layout/app-toolbar/app-toolbar.html">
+<link rel="import" href="../bower_components/app-layout/app-header-layout/app-header-layout.html">
+
+
+<link rel="import" href="ef-xapp.html">
+<link rel="import" href="ef-loginmodal.html">
+
+<dom-module id="my-register">
+    <!-- Defines the element's style and local DOM -->
+    <template>
+        <style>
+            :host {
+                margin: 0;
+                font-family: 'Roboto', 'Noto', sans-serif;
+                background-color: #eee;
+            }
+
+            /*body {*/
+                /*margin: 0;*/
+                /*font-family: 'Roboto', 'Noto', sans-serif;*/
+                /*background-color: #eee;*/
+            /*}*/
+
+            app-box {
+                position: fixed;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                --app-box-background-front-layer: {
+                    /*background-image: url(http://app-layout-assets.appspot.com/assets/GIRL_PharrellWilliams.jpg);*/
+                    background-image: url("../images/efaceless.png");
+                    background-repeat: no-repeat;
+                    background-size: 100%;
+                    padding-bottom: 1000px;
+                };
+            }
+
+            app-header {
+                color: #fff;
+                --app-header-background-rear-layer: {
+                    background-color: #ef6c00;
+                };
+            }
+
+            paper-icon-button {
+                --paper-icon-button-ink-color: white;
+            }
+
+            paper-fab {
+                position: absolute;
+                top: 232px;
+                right: 160px;
+                --paper-fab-background: #ef6c00;
+                --paper-fab-keyboard-focus-background: #de5c00;
+                --iron-icon-width: 36px;
+                --iron-icon-height: 36px;
+            }
+
+            .content {
+                margin: 196px 120px 120px;
+                padding: 32px 32px 60px;
+                background-color: #fff;
+                color: #333;
+                box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14);
+            }
+
+            [main-title] {
+                margin-left: 30px;
+                font-weight: 300;
+            }
+
+            h2 {
+                margin: 30px 0 14px;
+            }
+
+            .artist-date {
+                @apply --layout-horizontal;
+                padding-bottom: 12px;
+            }
+
+            .artist {
+                @apply --layout-flex;
+            }
+
+            time {
+                margin-left: 20px;
+                font-size: 13px;
+                color: #555;
+            }
+
+            summary {
+                padding: 16px 0;
+                font-size: 14px;
+                line-height: 1.5;
+            }
+
+            .song {
+                @apply --layout;
+                @apply --layout-center;
+                padding: 16px 0;
+            }
+
+            .song > .no {
+                width: 40px;
+            }
+
+            .song > .name {
+                @apply --layout-flex;
+                padding-right: 10px;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+            }
+
+            .song > .duration {
+                width: 60px;
+            }
+
+            /* mobile layout */
+            @media (max-width: 600px) {
+
+                .content {
+                    margin: 254px 0 0 0;
+                    box-shadow: none;
+                }
+
+                paper-fab {
+                    top: 290px;
+                    right: 16px;
+                }
+
+            }
+        </style>
+
+        <app-box
+                effects="parallax-background"
+                effects-config='{"parallax-background": {"scalar": -0.5}}'></app-box>
+
+        <app-header-layout>
+
+            <app-header slot="header" reveals>
+                <ef-xapp></ef-xapp>
+            </app-header>
+
+            <div class="content">
+                <h2>GIRL</h2>
+                <div class="artist-date">
+                    <div class="artist">Pharrell Williams</div><time>March 3, 2014</time>
+                </div>
+                <summary>
+                    Girl is the second studio album by American recording artist and record producer Pharrell Williams. The album was released on March 3, 2014, through Williams' label i Am Other and Columbia Records.
+                </summary>
+
+                <ef-loginmodal></ef-loginmodal>
+                <div class="song">
+                    <div class="no">1</div>
+                    <div class="name">Marilyn Monroe</div>
+                    <div class="duration">5:51</div>
+                    <iron-icon icon="more-vert"></iron-icon>
+                </div>
+            </div>
+        </app-header-layout>
+
+    </template>
+    <script>
+        // Your new element extends the Polymer.Element base class
+        class MyRegister extends Polymer.Element {
+            static get is() { return 'my-register'; }
+
+            ready() {
+                super.ready();
+            }
+
+            signIn (){
+                window.history.pushState({}, null, '/home');
+                window.dispatchEvent(new CustomEvent('location-changed'));
+            }
+        }
+        //Now, register your new custom element so the browser can use it
+        customElements.define(MyRegister.is, MyRegister);
+    </script>
+    <script>
+
+        addEventListener('WebComponentsReady', function() {
+
+            var appHeader = document.querySelector('app-header');
+            var appBox = document.querySelector('app-box');
+            var fadeBackgroundEffect = appHeader.createEffect('fade-background');
+
+            window.addEventListener('scroll', function() {
+                var progress = appBox.getScrollState().progress;
+                var isCondensed = progress > 0.25;
+
+                fadeBackgroundEffect.run(isCondensed ? 1 : 0);
+                appHeader.shadow = isCondensed;
+            });
+
+        });
+
+    </script>
+</dom-module>

@@ -55,22 +55,28 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 margin-left: 10px;
                 margin-right: 10px;
             }
+
+            paper-textarea {
+                max-width: 100%;
+            }
+
         </style>
 
         <form is="iron-form" method="get" action="/" id="basic">
-            <paper-textarea label="my emotion post"></paper-textarea>
-            <div role="listbox">
-                <paper-icon-item>
-                    <div class="avatar blue" slot="item-icon"></div>
-                    <paper-icon-button icon="alarm" alt="favourite this!"></paper-icon-button>
-                    <paper-icon-button icon="communication:location-on" alt="favourite this!"></paper-icon-button>
-                    <paper-item-body two-line>
-                        <div>Max Caracteres</div>
-                        <div secondary>32</div>
-                    </paper-item-body>
-                    <paper-button><iron-icon icon="check"></iron-icon>EMOTION!</paper-button>
-                </paper-icon-item>
-            </div>
+                <paper-textarea label="my emotion post" required auto-validate autofocus char-counter rows="2"></paper-textarea>
+                <div role="listbox">
+                    <paper-icon-item>
+                        <div class="avatar blue" slot="item-icon"></div>
+                        <paper-icon-button icon="alarm" alt="favourite this!"></paper-icon-button>
+                        <paper-icon-button icon="communication:location-on" alt="favourite this!"></paper-icon-button>
+                        <paper-item-body two-line>
+                            <div>Max Caracteres</div>
+                            <div secondary>32</div>
+                        </paper-item-body>
+                        <paper-button><iron-icon icon="check"></iron-icon>EMOTION!</paper-button>
+                    </paper-icon-item>
+                </div>
+
         </form>
     </template>
 
