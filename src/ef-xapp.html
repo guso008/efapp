@@ -99,7 +99,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                         <!-- Nav on desktop: tabs -->
                         <paper-tabs selected="{{selected}}" attr-for-selected="name">
                             <template is="dom-repeat" items="{{items}}">
-                                <paper-tab name$="{{item}}">{{item}}</paper-tab>
+                                <paper-tab name$="{{item}}" on-click="changeTab">{{item}}</paper-tab>
                             </template>
                         </paper-tabs>
                     </app-toolbar>
@@ -146,6 +146,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 if (wide && drawer.opened) {
                     drawer.opened = false;
                 }
+            }
+
+            changeTab(name){
+                var tab = name.currentTarget.textContent;
+                if(tab == 'Sign Up'){
+                    window.history.pushState({}, null, '/register');
+                } else if (tab == 'Sign In'){
+                    window.history.pushState({}, null, '/home');
+                }
+                window.dispatchEvent(new CustomEvent('location-changed'));
             }
 
         }
