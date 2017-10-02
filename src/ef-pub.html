@@ -25,10 +25,13 @@
 <link rel="import" href="../bower_components/iron-demo-helpers/demo-pages-shared-styles.html">
 
 <link rel="import" href="my-icons.html">
-<link rel="lazy-import" href="my-emotion.html">
+<link rel="lazy-import" href="my-fullpage.html">
+<link rel="lazy-import" href="my-about.html">
 <link rel="lazy-import" href="my-view404.html">
 
-<dom-module id="my-app">
+<link rel="import" href="ef-xapp.html">
+
+<dom-module id="ef-pub">
     <template>
         <style> :host {
             --app-primary-color: #4285f4;
@@ -81,6 +84,8 @@
             box-sizing: border-box;
             background-color: #DDD;
         }
+
+
         </style>
 
 
@@ -90,71 +95,22 @@
                    data="{{routeData}}"
                    tail="{{subroute}}">
         </app-route>
-        <!--<template id="login" is="dom-if" if="{{conditionLogin}}">-->
-            <!--<my-fullpage></my-fullpage>-->
-        <!--</template>-->
-        <!--<template id="register" is="dom-if" if="{{conditionLogin}}">-->
-            <!--<my-register></my-register>-->
-        <!--</template>-->
-        <!--<template id="page" is="dom-if" if="{{conditionPage}}">-->
-            <app-drawer-layout id="drawerLayout" fullbleed force-narrow>
-            <!-- Drawer content -->
-            <app-drawer id="drawer" slot="drawer">
-                <app-toolbar>
-                    <div main-title>Menú</div>
-                </app-toolbar>
-                <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
-                    <a name="home" href="home">Inicio</a>
-                    <a name="emotion" href="emotion">Mis Emociones</a>
-                </iron-selector>
-            </app-drawer>
 
-            <!-- Main content -->
-            <app-header-layout has-scrolling-region>
-
-                <app-header slot="header" condenses reveals effects="waterfall">
-                    <app-toolbar>
-                        <paper-icon-button icon="my-icons:menu" drawer-toggle></paper-icon-button>
-                        <div main-title>Efaceless</div>
-                        <paper-icon-button icon="search" on-click="searchHome"></paper-icon-button>
-                        <paper-menu-button  vertical-offset="52" vertical-align="top" horizontal-offset="10" horizontal-align="right">
-                            <paper-icon-button slot="dropdown-trigger" alt="menu" src="http://lorempixel.com/400/400" class="avatar"></paper-icon-button>
-                            <paper-listbox slot="dropdown-content">
-                                <paper-item>Alive</paper-item>
-                                <paper-item>History</paper-item>
-                                <paper-item>Empathy</paper-item>
-                                <paper-item>Notifications</paper-item>
-                            </paper-listbox>
-                        </paper-menu-button>
-                        <paper-menu-button  vertical-offset="52" vertical-align="top" horizontal-offset="10" horizontal-align="right">
-                            <paper-icon-button icon="more-vert" slot="dropdown-trigger" alt="menu"></paper-icon-button>
-                            <paper-listbox slot="dropdown-content">
-                                <paper-item>Help</paper-item>
-                                <paper-item>Term</paper-item>
-                                <paper-item>About us</paper-item>
-                                <paper-item>Config</paper-item>
-                                <paper-item>Logout</paper-item>
-                            </paper-listbox>
-                        </paper-menu-button>
-                    </app-toolbar>
-                </app-header>
-
-                <iron-pages
-                        selected="[[page]]"
-                        attr-for-selected="name"
-                        fallback-selection="view404"
-                        role="main">
-                    <my-home name="home"></my-home>
-                    <my-emotion name="emotion"></my-emotion>
-                    <my-view404 name="view404"></my-view404>
-                </iron-pages>
-            </app-header-layout>
-        </app-drawer-layout>
-        </template>
-    <!--</template>-->
-    <script> class MyApp extends Polymer.Element {
+        <iron-pages
+                selected="[[page]]"
+                attr-for-selected="name"
+                fallback-selection="view404"
+                role="main">
+            <my-fullpage name="fullpage"></my-fullpage>
+            <my-about name="about"></my-about>
+            <my-home name="home"></my-home>
+            <my-emotion name="emotion"></my-emotion>
+            <my-view404 name="view404"></my-view404>
+        </iron-pages>
+    </template>
+    <script> class EfPub extends Polymer.Element {
         static get is() {
-            return 'my-app';
+            return 'ef-pub';
         }
 
         static get properties() {
@@ -193,8 +149,7 @@
 
             // If no page was found in the route data, page will be an empty string.
             // Default to 'view1' in that case.
-            //this.page = page || 'login';
-            this.page = page || 'home';
+            this.page = page || 'fullpage';
 
             // Close a non-persistent drawer when the page & route are changed.
 //            if (this.page != 'login' && !this.$.drawer.persistent) {
@@ -222,6 +177,6 @@
         }
     }
 
-    window.customElements.define(MyApp.is, MyApp);
+    window.customElements.define(EfPub.is, EfPub);
     </script>
 </dom-module>

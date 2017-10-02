@@ -106,6 +106,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         </style>
 
         <iron-ajax url="src/data/contacts.json" last-response="{{items}}" auto></iron-ajax>
+        <!--<iron-ajax url="http://localhost/efappserver/public/emotions" last-response="{{items}}" auto></iron-ajax>-->
         <iron-list id="list" items="[[items]]" as="item" selection-enabled multi-selection>
             <template>
                 <div>

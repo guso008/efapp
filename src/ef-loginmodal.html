@@ -70,7 +70,7 @@
         </style>
 
         <iron-form id="form4">
-            <form action="/home" method="get">
+            <form action="/app" method="get">
                 <paper-input name="password" label="Password" type="password" required auto-validate></paper-input>
                 <paper-checkbox name="read" required>You must check this box</paper-checkbox><br>
 
@@ -117,8 +117,8 @@
                 setTimeout(function() {
                     form4.submit()
 
-                    var animated = document.querySelector('#animated');
-                    animated.close();
+//                    var animated = document.querySelector('#animated');
+//                    animated.close();
 
                     window.history.pushState({}, null, '/home');
                     window.dispatchEvent(new CustomEvent('location-changed'));

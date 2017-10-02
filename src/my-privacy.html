@@ -14,11 +14,7 @@
 <link rel="import" href="../bower_components/app-layout/app-toolbar/app-toolbar.html">
 <link rel="import" href="../bower_components/app-layout/app-header-layout/app-header-layout.html">
 
-
-<link rel="import" href="ef-xapp.html">
-<link rel="import" href="ef-loginmodal.html">
-
-<dom-module id="my-register">
+<dom-module id="my-privacy">
     <!-- Defines the element's style and local DOM -->
     <template>
         <style>
@@ -27,12 +23,6 @@
                 font-family: 'Roboto', 'Noto', sans-serif;
                 background-color: #eee;
             }
-
-            /*body {*/
-                /*margin: 0;*/
-                /*font-family: 'Roboto', 'Noto', sans-serif;*/
-                /*background-color: #eee;*/
-            /*}*/
 
             app-box {
                 position: fixed;
@@ -73,8 +63,8 @@
             .content {
                 margin: 196px 120px 120px;
                 padding: 32px 32px 60px;
-                background-color: #fff;
-                color: #333;
+                background-color: rgba(0, 0, 0, 0.7);
+                color: #fff;
                 box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14);
             }
 
@@ -145,71 +135,28 @@
 
             }
         </style>
-
-        <app-box
-                effects="parallax-background"
-                effects-config='{"parallax-background": {"scalar": -0.5}}'></app-box>
-
-        <app-header-layout>
-
-            <app-header slot="header" reveals>
-                <ef-xapp></ef-xapp>
-            </app-header>
-
-            <div class="content">
-                <h2>GIRL</h2>
-                <div class="artist-date">
-                    <div class="artist">Pharrell Williams</div><time>March 3, 2014</time>
-                </div>
-                <summary>
-                    Girl is the second studio album by American recording artist and record producer Pharrell Williams. The album was released on March 3, 2014, through Williams' label i Am Other and Columbia Records.
-                </summary>
-
-                <ef-loginmodal></ef-loginmodal>
-                <div class="song">
-                    <div class="no">1</div>
-                    <div class="name">Marilyn Monroe</div>
-                    <div class="duration">5:51</div>
-                    <iron-icon icon="more-vert"></iron-icon>
-                </div>
+        <div class="content">
+            <h2>Privacy</h2>
+            <div class="artist-date">
+                <div class="artist">Pharrell Williams</div><time>March 3, 2014</time>
             </div>
-        </app-header-layout>
-
+            <summary>
+                Girl is the second studio album by American recording artist and record producer Pharrell Williams. The album was released on March 3, 2014, through Williams' label i Am Other and Columbia Records.
+            </summary>
+        </div>
     </template>
     <script>
         // Your new element extends the Polymer.Element base class
-        class MyRegister extends Polymer.Element {
-            static get is() { return 'my-register'; }
+        class MyPrivacy extends Polymer.Element {
+            static get is() { return 'my-privacy'; }
 
             ready() {
                 super.ready();
             }
 
-            signIn (){
-                window.history.pushState({}, null, '/home');
-                window.dispatchEvent(new CustomEvent('location-changed'));
-            }
         }
         //Now, register your new custom element so the browser can use it
-        customElements.define(MyRegister.is, MyRegister);
+        customElements.define(MyPrivacy.is, MyPrivacy);
     </script>
-    <script>
 
-        addEventListener('WebComponentsReady', function() {
-
-            var appHeader = document.querySelector('app-header');
-            var appBox = document.querySelector('app-box');
-            var fadeBackgroundEffect = appHeader.createEffect('fade-background');
-
-            window.addEventListener('scroll', function() {
-                var progress = appBox.getScrollState().progress;
-                var isCondensed = progress > 0.25;
-
-                fadeBackgroundEffect.run(isCondensed ? 1 : 0);
-                appHeader.shadow = isCondensed;
-            });
-
-        });
-
-    </script>
 </dom-module>
