@@ -27,7 +27,7 @@
 <link rel="lazy-import" href="my-emotion.html">
 <link rel="lazy-import" href="my-view404.html">
 
-<dom-module id="my-app">
+<dom-module id="back-app">
     <template>
         <style> :host {
             --app-primary-color: #4285f4;
@@ -178,27 +178,7 @@
             // If no page was found in the route data, page will be an empty string.
             // Default to 'view1' in that case.
             //this.page = page || 'login';
-            this.page = page || 'fullpage';
-
-//            if (this.page == 'login') {
-            if (this.page == 'fullpage') {
-                var page = this.shadowRoot.querySelector('#page');
-                page.if = false;
-                var login = this.shadowRoot.querySelector('#login');
-                login.if = true;
-            } else if (this.page == 'register') {
-                var page = this.shadowRoot.querySelector('#page');
-                page.if = false;
-                var login = this.shadowRoot.querySelector('#register');
-                login.if = true;
-            } else {
-                var login = this.shadowRoot.querySelector('#login');
-                login.if = false;
-                var register = this.shadowRoot.querySelector('#register');
-                register.if = false;
-                var page = this.shadowRoot.querySelector('#page');
-                page.if = true;
-            }
+            this.page = page || 'home';
 
             // Close a non-persistent drawer when the page & route are changed.
 //            if (this.page != 'login' && !this.$.drawer.persistent) {
